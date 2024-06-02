@@ -24,5 +24,10 @@ fi
 nix-env -iA devenv -f https://github.com/NixOS/nixpkgs/tarball/nixpkgs-unstable
 devenv init
 
+# remove nix install script
+rm ./install
+
 # Install ChromeOS extensions
+curl -LO https://nixos.org/nix/install
+chmod +x ./install
 sudo ./ext vsc
