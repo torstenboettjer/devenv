@@ -43,7 +43,7 @@ install_devtools() {
 #######################################
 config_git() {
     GIT_VERSION=$(git --version)
-    echo "Git Client: $GIT_VERSION", set global git config to nano; $1; $2" >> ./setup.log
+    echo "Git: $GIT_VERSION", global config nano; $1; $2" >> ./setup.log
     git config --global core.editor 'nano'
     git config --global user.name '$1'
     git config --global user.email '$2'
@@ -52,7 +52,7 @@ config_git() {
 install_gh() {
     apt install gh -y
     GH_VERSION=$(gh --version)
-    echo "GH: $GH_VERSION" >> ./setup.log
+    echo "Github: $GH_VERSION" >> ./setup.log
 }
 
 install_devenv() {
@@ -177,7 +177,6 @@ install_rust() {
 # PostgreSQL
 #######################################
 install_psql() {
-    clear
     echo "Installing PostgreSQL"
     apt install -y postgresql
     apt install -y postgresql-contrib
@@ -185,7 +184,7 @@ install_psql() {
     echo "Installed PSQL $PSQL_VERSION" >> ./setup.log
 }
 
-# Define a function named "main"
+# Select functions
 main() {
     # Minimal install
     update
@@ -193,5 +192,5 @@ main() {
     install_vsc
 }
 
-# Call the "main" function with all the command-line arguments
+# Execute main function with all the command-line arguments
 main "$@"
