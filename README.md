@@ -1,4 +1,4 @@
-# Nix devenv on ChromeOS
+# Development Environment on a Chromebook
 
 Install VSCode with devenv.sh on a Chromebook.
 
