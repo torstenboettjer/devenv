@@ -9,7 +9,9 @@ touch ./setup.log
 # https://nixos.org/
 if command -v nix &> /dev/null; then
     echo "Installing nix single user mode..."
-    curl -L https://nixos.org/nix/install | sh --no-daemon --yes
+    curl -LO https://nixos.org/nix/install
+    chmod +x ./install
+    ./install --no-daemon --yes
     . $HOME/.nix-profile/etc/profile.d/nix.sh
     echo "--> done"
     NIXVERSION=$(nix --version)
