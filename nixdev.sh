@@ -12,7 +12,7 @@ if command -v nix &> /dev/null; then
     echo "$NIXVERSION is installed." >> ./setup.log
 else
     echo "Installing nix single user mode..."
-    sh <(curl -L https://nixos.org/nix/install) --no-daemon --yes
+    curl -L https://nixos.org/nix/install | sh --no-daemon --yes
     . $HOME/.nix-profile/etc/profile.d/nix.sh
     echo "--> done"
     NIXVERSION=$(nix --version)
