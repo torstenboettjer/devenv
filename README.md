@@ -1,5 +1,6 @@
-# devenv
-Install script for devenv.sh on ChromeOS
+# Nix devenv on ChromeOS
+
+Install VSCode with devenv.sh on a Chromebook.
 
 ## Install
 
