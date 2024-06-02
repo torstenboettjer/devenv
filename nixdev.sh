@@ -56,7 +56,7 @@ install_vsc() {
 main() {
     # Minimal install
     sudo update
-    install_devenv
+    #install_devenv
     sudo install_vsc
 }
 
