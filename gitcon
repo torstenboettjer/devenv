@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Exit on error
+set -e    
+
+# Retrieve git version
+GIT_VERSION=$(git --version)
+
+# Check if the first argument is provided
+if [[ -z "$1" ]]; then
+    echo "Error: No github user provided."
+    echo "Usage: $0 <user> <email> ..."
+    exit 1
+fi
+
+# Check if the second argument is provided
+if [[ -z "$2" ]]; then
+    echo "Error: No email not provided."
+    echo "Usage: $0 <user> <email> ..."
+    exit 1
+fi
+
+git config --global core.editor nano
+git config --global user.name $1
+git config --global user.email $2
+
+echo "Git: $GIT_VERSION, Editor: nano; User: $1; eMail: $2" >> ./setup.log
+
+echo "$GIT_VERSION"
+echo "User provided: $1"
+echo "eMail provided: $2"
+echo "Default editor is set to nano"
+

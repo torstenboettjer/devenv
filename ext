@@ -24,7 +24,7 @@ update() {
 #######################################
 # Visual Studio Code
 #######################################
-install_vsc() {
+vsc() {
     echo "Installing VSCode"
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
     install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
@@ -39,31 +39,20 @@ install_vsc() {
 #######################################
 # Python incl. developer tools
 #######################################
-install_devtools() {
+py3() {
     echo "Installing Development Tools"
     apt install -y build-essential libssl-dev libnss3-dev libffi-dev make nano python3-pip curl wget gpg
     PYTHON_VERSION=$(python3 --version)
     echo "Python: $PYTHON_VERSION" >> ./setup.log
 }
 
-#######################################
-# Config git client
-#######################################
-config_git() {
-    GIT_VERSION=$(git --version)
-    echo "Git: $GIT_VERSION, global config nano; $1; $2" >> ./setup.log
-    git config --global core.editor 'nano'
-    git config --global user.name '$1'
-    git config --global user.email '$2'
-}
-
-install_gh() {
+gth() {
     apt install gh -y
     GH_VERSION=$(gh --version)
     echo "Github: $GH_VERSION" >> ./setup.log
 }
 
-install_nxm() {
+nxm() {
     echo "Installing nix as daemon, after install the shell session will be closed."
     sh <(curl -L https://nixos.org/nix/install) --daemon --yes
     echo "Nix installed, restarting ..."
@@ -73,7 +62,7 @@ install_nxm() {
 #######################################
 # Docker AMD
 #######################################
-install_docker() {
+dkr() {
     clear
     echo "Installing Docker"
     apt update && apt install -y docker.io
@@ -87,25 +76,9 @@ install_docker() {
 }
 
 #######################################
-# DevPod AMD
-#######################################
-install_devpod() {
-    echo "Installing DevPod"
-    curl -L -o devpod https://github.com/loft-sh/devpod/releases/latest/download/DevPod_linux_amd64.AppImage \
-        && chmod +x ./devpod \
-        && mv ./devpod /opt/devpod
-    echo "DevPod UI is installed in /opt/devpod" >> ./setup.log
-    curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" \
-        && install -c -m 0755 devpod /usr/local/bin \
-        && rm -f devpod
-        DVP_VERSION=$(devpod version)
-        echo "$DVP_VERSION" >> ./setup.log
-}
-
-#######################################
 # Snap application store
 #######################################
-option_snapd() {
+snap() {
     clear
     echo "Installing snap"
     apt install libsquashfuse0 squashfuse fuse snapd -y
@@ -118,7 +91,7 @@ option_snapd() {
 #######################################
 # Terraform
 #######################################
-option_terraform() {
+tf() {
     clear
     echo "Installing Terraform"
     apt install -y gnupg software-properties-common
@@ -137,7 +110,7 @@ option_terraform() {
 #######################################
 # Install Rust
 #######################################
-install_rust() {
+rustlang() {
     echo "Installing rust"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     source "$HOME/.cargo/env"
@@ -153,7 +126,7 @@ install_rust() {
 #######################################
 # PostgreSQL
 #######################################
-install_psql() {
+psql() {
     echo "Installing PostgreSQL"
     apt install -y postgresql
     apt install -y postgresql-contrib
@@ -165,7 +138,7 @@ install_psql() {
 main() {
     # inimal selection
     update
-    install_vsc
+    $1
     $CMD_SHUTDOWN
 }
 
