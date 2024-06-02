@@ -10,16 +10,6 @@ set -e
 touch ./setup.log
 
 #######################################
-# Check if the script is run with sudo
-#######################################
-sudo_check() {
-    if [ "$EUID" -ne 0 ]; then
-        echo "Please run this script with sudo."
-        exit 1
-    fi
-}
-
-#######################################
 # System Update
 #######################################
 update() {
