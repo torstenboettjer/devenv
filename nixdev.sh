@@ -28,6 +28,7 @@ devenv init
 rm ./install
 
 # Install ChromeOS extensions
-curl -LO https://nixos.org/nix/install
-chmod +x ./install
+curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/ext
+chmod +x ./ext
 sudo ./ext vsc
+rm ./ext
