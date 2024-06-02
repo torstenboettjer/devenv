@@ -8,13 +8,13 @@ touch ./setup.log
 
 # https://nixos.org/
 if command -v nix &> /dev/null; then
-    NIXVERSION=$(nix --version)
-    echo "$NIXVERSION is installed." >> ./setup.log
-else
     echo "Installing nix single user mode..."
     curl -L https://nixos.org/nix/install | sh --no-daemon --yes
     . $HOME/.nix-profile/etc/profile.d/nix.sh
     echo "--> done"
+    NIXVERSION=$(nix --version)
+    echo "$NIXVERSION is installed." >> ./setup.log
+else
     NIXVERSION=$(nix --version)
     echo "$NIXVERSION is installed." >> ./setup.log
 fi
