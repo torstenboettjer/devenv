@@ -55,9 +55,9 @@ install_vsc() {
 # Select functions
 main() {
     # Minimal install
-    update
+    sudo update
     install_devenv
-    install_vsc
+    sudo install_vsc
 }
 
 # Execute main function with all the command-line arguments
