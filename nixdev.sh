@@ -1,22 +1,10 @@
 #!/usr/bin/env bash
 
-# Constants
-readonly CMD_SHUTDOWN="shutdown -P now; init 0"
-
 # Exit on error
 set -e
 
 # create log file
 touch ./setup.log
-
-#######################################
-# System Update
-#######################################
-update() {
-    echo "Updating Linux Environment"
-    apt update && apt upgrade -y && apt autoremove -y && apt autoclean -y
-    echo "Prepare: System update" >> ./setup.log
-}
 
 #######################################
 # devenv.sh incl. nix
@@ -37,27 +25,10 @@ install_devenv() {
     devenv init
 }
 
-#######################################
-# Visual Studio Code
-#######################################
-install_vsc() {
-    echo "Installing VSCode"
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-    install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-    sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-    rm -f packages.microsoft.gpg
-    apt install apt-transport-https
-    apt update
-    apt install code -y
-    echo "Installed Visual Code" >> ./setup.log
-}
-
 # Select functions
 main() {
-    # Minimal install
-    sudo update
-    #install_devenv
-    sudo install_vsc
+    install_devenv
+    sudo ./ext.sh
 }
 
 # Execute main function with all the command-line arguments

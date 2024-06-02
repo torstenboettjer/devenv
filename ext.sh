@@ -1,12 +1,39 @@
+#!/usr/bin/env bash
+
+# Constants
+readonly CMD_SHUTDOWN="shutdown -P now; init 0"
+
+# Exit on error
+set -e
+
+# Check if the script is run with sudo
+if [ "$EUID" -ne 0 ]; then
+    echo "This script needs to run with sudo."
+    exit 1
+fi
 
 #######################################
-# Check if the script is run with sudo
+# System Update
 #######################################
-sudo_check() {
-    if [ "$EUID" -ne 0 ]; then
-        echo "Please run this script with sudo."
-        exit 1
-    fi
+update() {
+    echo "Updating Linux Environment"
+    apt update && apt upgrade -y && apt autoremove -y && apt autoclean -y
+    echo "Prepare: System update" >> ./setup.log
+}
+
+#######################################
+# Visual Studio Code
+#######################################
+install_vsc() {
+    echo "Installing VSCode"
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+    rm -f packages.microsoft.gpg
+    apt install apt-transport-https
+    apt update
+    apt install code -y
+    echo "Installed Visual Code" >> ./setup.log
 }
 
 #######################################
@@ -24,7 +51,7 @@ install_devtools() {
 #######################################
 config_git() {
     GIT_VERSION=$(git --version)
-    echo "Git: $GIT_VERSION", global config nano; $1; $2" >> ./setup.log
+    echo "Git: $GIT_VERSION, global config nano; $1; $2" >> ./setup.log
     git config --global core.editor 'nano'
     git config --global user.name '$1'
     git config --global user.email '$2'
@@ -133,3 +160,14 @@ install_psql() {
     PSQL_VERSION=$(psql --version)
     echo "Installed PSQL $PSQL_VERSION" >> ./setup.log
 }
+
+# Select packages to install
+main() {
+    # inimal selection
+    update
+    install_vsc
+    $CMD_SHUTDOWN
+}
+
+# Execute main function with all the command-line arguments
+main "$@"
