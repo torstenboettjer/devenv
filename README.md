@@ -14,4 +14,4 @@ curl -sL https://raw.githubusercontent.com/torstenboettjer/devenv/main/nixdev.sh
 curl -sL https://raw.githubusercontent.com/torstenboettjer/devenv/main/nixrm.sh | sh
 ```
 ### Links
-(ChromeOS)[https://chromeenterprise.google/os/]
+[ChromeOS](https://chromeenterprise.google/os/)
