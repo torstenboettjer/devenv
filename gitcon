@@ -9,14 +9,14 @@ GIT_VERSION=$(git --version)
 # Check if the first argument is provided
 if [[ -z "$1" ]]; then
     echo "Error: No github user provided."
-    echo "Usage: $0 <user> <email> ..."
+    echo "Usage: $0 \$USER <email> ..."
     exit 1
 fi
 
 # Check if the second argument is provided
 if [[ -z "$2" ]]; then
     echo "Error: No email not provided."
-    echo "Usage: $0 <user> <email> ..."
+    echo "Usage: $0 \$USER <email> ..."
     exit 1
 fi
 
