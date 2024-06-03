@@ -20,6 +20,7 @@ else
     NIXVERSION=$(nix --version)
     echo "$NIXVERSION is installed." >> ./setup.log
 fi
+
 # https://devenv.sh/
 nix-env -iA devenv -f https://github.com/NixOS/nixpkgs/tarball/nixpkgs-unstable
 devenv init
@@ -27,8 +28,7 @@ devenv init
 # remove nix install script
 rm ./install
 
-# Install ChromeOS extensions
-curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/ext
-chmod +x ./ext
-sudo ./ext vsc
-rm ./ext
+# Install VS Code as ChromeOS extensions
+curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/extos
+chmod +x ./extos
+sudo ./extos vsc
