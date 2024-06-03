@@ -28,7 +28,7 @@ devenv init
 # remove nix install script
 rm ./install
 
-# Install VS Code as ChromeOS extensions
-curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/extos
-chmod +x ./extos
-sudo ./extos vsc
+# Optional: Install VS Code as extension to ChromeOS directly
+# curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/extos
+# chmod +x ./extos
+# sudo ./extos vsc

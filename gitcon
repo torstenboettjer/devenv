@@ -30,4 +30,3 @@ echo "$GIT_VERSION"
 echo "User provided: $1"
 echo "eMail provided: $2"
 echo "Default editor is set to nano"
-
