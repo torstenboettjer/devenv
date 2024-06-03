@@ -1,4 +1,4 @@
-# Minimal Development Environment on a Chromebook
+# Minimal Development Environment
 
 Creating a minimal developer environment on a Chromebook utilizes `devenv.sh` on Linux (Crostini). Installing and configuring the devenv shell requires the following steps:
 
@@ -20,10 +20,9 @@ Create a script called `nixdev.sh` will install and configure a development envi
 
 ```sh
 curl -sL https://raw.githubusercontent.com/torstenboettjer/devenv/main/nixdev.sh | sh
+```
 
 The shell ist started with `devenv shell` and stopped with CTRL+D.
-
-```
 
 ## Remove
 
@@ -34,9 +33,8 @@ curl -sL https://raw.githubusercontent.com/torstenboettjer/devenv/main/nixrm.sh 
 ```
 
 ### Toolset
-
-* [Linux Development Environment](https://chromeos.dev/en/linux)
-* [VS Code](https://code.visualstudio.com/docs/setup/linux)
-* [NixOS](https://nixos.org/)
-* [devenv.sh](https://devenv.sh/)
-* [process-compose](https://f1bonacc1.github.io/process-compose/)
+* **[Linux Development Environment](https://chromeos.dev/en/linux)**: Ubuntu VM that enables developers to run Linux apps for development alongside the usual ChromeOS desktop & apps.
+* **[VS Code](https://code.visualstudio.com/docs/setup/linux)**: Cross-platform code editor developed by Microsoft supporting a wide range of programming languages.
+* [NixOS](https://nixos.org/): Linux package manager that enables reproducible and declarative builds for virtual machines.
+* [devenv.sh](https://devenv.sh/): A shell that is using Nix for the definition of reproducible and composable development environments.
+* [process-compose](https://f1bonacc1.github.io/process-compose/): Command-line utility that facilitates the management of processes similar to docker compose but on a local machine.
