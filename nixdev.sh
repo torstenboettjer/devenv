@@ -28,6 +28,15 @@ devenv init
 # remove nix install script
 rm ./install
 
+if direnv --version &> /dev/null; then
+    sudo apt install -y direnv
+    DIRENV_VERSION=$(direnv --version)
+    echo "$DIRENV_VERSION is installed." >> ./setup.log
+else
+    DIRENV_VERSION=$(direnv --version)
+    echo "$DIRENV_VERSION is installed." >> ./setup.log
+fi
+
 # Optional: Install VS Code as extension to ChromeOS directly
 curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/extos
 chmod +x ./extos
