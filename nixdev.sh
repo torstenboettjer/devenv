@@ -29,6 +29,6 @@ devenv init
 rm ./install
 
 # Optional: Install VS Code as extension to ChromeOS directly
-# curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/extos
-# chmod +x ./extos
-# sudo ./extos vsc
+curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/extos
+chmod +x ./extos
+sudo ./extos direnv
