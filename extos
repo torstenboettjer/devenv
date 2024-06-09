@@ -140,7 +140,7 @@ psql() {
 
 direnv() {
     echo "Installing Direnv"
-    apt install direnv
+    apt install direnv -y
     echo 'eval "$(direnv hook bash)"' >> /home/$SUDO_USER/.bashrc
     echo 'export DIRENV_LOG_FORMAT=""' >> /home/$SUDO_USER/.bashrc
     echo "Installed direnv" >> ./setup.log

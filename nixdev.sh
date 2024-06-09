@@ -28,8 +28,14 @@ devenv init
 # remove nix install script
 rm ./install
 
+curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/extos
+chmod +x ./extos
+
+# Install optional extensions to ChromeOS
 if direnv --version &> /dev/null; then
-    sudo apt install -y direnv
+    apt install direnv -y
+    echo 'eval "$(direnv hook bash)"' >> /home/$USER/.bashrc
+    echo 'export DIRENV_LOG_FORMAT=""' >> /home/$USER/.bashrc
     DIRENV_VERSION=$(direnv --version)
     echo "$DIRENV_VERSION is installed." >> ./setup.log
 else
@@ -37,7 +43,9 @@ else
     echo "$DIRENV_VERSION is installed." >> ./setup.log
 fi
 
-# Optional: Install VS Code as extension to ChromeOS directly
-curl -LO https://raw.githubusercontent.com/torstenboettjer/devenv/main/extos
-chmod +x ./extos
-sudo ./extos direnv
+#https://nixos.wiki/wiki/Home_Manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+echo '. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"' >>  ~/.profile
+home-manager build
